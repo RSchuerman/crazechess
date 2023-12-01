@@ -8,7 +8,13 @@ import Control from "./components/Control/Control";
 import TakeBack from "./components/Control/bits/TakeBack";
 import MovesList from "./components/Control/bits/MovesList";
 
-function App() {
+import { Amplify } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import config from "./amplifyconfiguration.json";
+Amplify.configure(config);
+
+function App({ signOut, user }) {
   const [appState, dispatch] = useReducer(reducer, initGameState);
 
   const providerState = {
@@ -18,6 +24,8 @@ function App() {
 
   return (
     <AppContext.Provider value={providerState}>
+      <h1>Hello {user.username}</h1>
+      <button onClick={signOut}>Sign out</button>
       <div className="App">
         <Board />
         <Control>
@@ -29,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

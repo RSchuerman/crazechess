@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chess-staging-200956-authRole",
+      "UnauthRoleArn": "arn:aws:iam::499967576978:role/amplify-chess-staging-200956-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::499967576978:role/amplify-chess-staging-200956-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-chess-staging-200956-deployment",
+      "UnauthRoleName": "amplify-chess-staging-200956-unauthRole",
+      "StackName": "amplify-chess-staging-200956",
+      "StackId": "arn:aws:cloudformation:us-east-2:499967576978:stack/amplify-chess-staging-200956/990a6730-9085-11ee-adeb-0ad48b5520f5",
+      "AmplifyAppId": "dhbm9b1v3ye9n"
+    },
+    "categories": {
+      "auth": {
+        "Chess": {}
+      }
+    }
+  }
+}
