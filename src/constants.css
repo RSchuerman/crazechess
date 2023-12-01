@@ -1,8 +1,10 @@
 :root {
   --tile-size: 100px;
-  --light-tile: #e3dbcf;
-  --dark-tile: #639bb5;
-  --bg-color: rgb(70, 67, 67);
+  --light-tile: #f0d8b6;
+  --dark-tile: #b48764;
+  --bg-color: #202020;
+  --highlight: rgba(0, 0, 0, 0.1);
+  --check: #feec48;
 }
 
 @media all and (max-width: 450px) {
