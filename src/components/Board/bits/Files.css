@@ -1,5 +1,5 @@
 .files {
-  color: var(--dark-tile);
+  color: var(--light-tile);
   height: calc(0.25 * var(--tile-size));
   grid-column: 2;
   display: flex;
