@@ -1,18 +1,14 @@
+import "./LoginPage.css";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import { confirmSignUp, autoSignIn } from "@aws-amplify/auth";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
 function ValidatePage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [username, setUserName] = useState("");
+  const [username, setUserName] = useState(location.username);
   const [authenticationCode, setAuthenticationCode] = useState("");
 
   async function handleRegisterConfirmation(event) {
@@ -41,46 +37,28 @@ function ValidatePage() {
   }
 
   return (
-    <Container>
-      <Row className="px-4 my-5">
-        <Col>
-          <h1>Validate</h1>
-        </Col>
-      </Row>
-      <Row className="px-4 my-5">
-        <Col sm={6}>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicText">
-              <Form.Label>User Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter User Name"
-                onChange={(evt) => setUserName(evt.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicText">
-              <Form.Label>Authentication Code</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Authentication Code"
-                onChange={(evt) => setAuthenticationCode(evt.target.value)}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="button"
-              onClick={handleRegisterConfirmation}
-            >
-              Validate &gt;&gt;
-            </Button>
-            &nbsp;&nbsp;
-            <Link to="/">
-              <Button variant="outline-primary">Cancel</Button>
-            </Link>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <div className="body">
+      <div className="container1">
+        <div className="login-box">
+          <h1 className="login">Validate</h1>
+          <input
+            type="text"
+            className="name ele"
+            placeholder="Username"
+            onChange={(evt) => setUserName(evt.target.value)}
+          />
+          <input
+            type="text"
+            className="name ele"
+            placeholder="Enter Authentication Code"
+            onChange={(evt) => setAuthenticationCode(evt.target.value)}
+          />
+          <button className="clkbtn" onClick={handleRegisterConfirmation}>
+            Validate
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

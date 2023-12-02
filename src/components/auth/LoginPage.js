@@ -60,7 +60,7 @@ function LogInPage(props) {
       });
 
       if (nextStep.signUpStep === "CONFIRM_SIGN_UP") {
-        navigate("/validate");
+        navigate("/validate", { username: username });
       } else {
         console.log(nextStep, isSignUpComplete, userId);
       }

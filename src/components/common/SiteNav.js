@@ -22,7 +22,7 @@ function SiteNav(props) {
     <header>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand>Reed Chess</Navbar.Brand>
+          <Navbar.Brand href="/">Reed Chess</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {props.isAuthenticated !== false && (
