@@ -3,16 +3,18 @@ import { reducer } from "./reducer/reducer";
 import { useReducer } from "react";
 import { initGameState } from "./constants";
 import AppContext from "./contexts/Context";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./components/home/HomePage";
-import LogInPage from "./components/auth/LoginPage";
 
+import { Route, Routes } from "react-router-dom";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "./amplifyconfiguration.json";
+
 import SiteNav from "./components/common/SiteNav";
 import SiteFooter from "./components/common/SiteFooter";
+import HomePage from "./components/home/HomePage";
+import LogInPage from "./components/auth/LoginPage";
+
 Amplify.configure(config);
 
 function App({ signOut, user }) {
@@ -27,7 +29,7 @@ function App({ signOut, user }) {
     <AppContext.Provider value={providerState}>
       {/* //   <h1>Hello {user.preferred_username}</h1>
     //   <button onClick={signOut}>Sign out</button> */}
-      <SiteNav />
+      <SiteNav logOut={signOut} />
       <Routes>
         <Route path="*" element={<HomePage />} />
         <Route path="/" exact={true} element={<HomePage />} />

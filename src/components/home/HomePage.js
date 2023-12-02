@@ -1,3 +1,4 @@
+import "../../App.css";
 import Board from "../Board/Board";
 import Control from "../Control/Control";
 import TakeBack from "../Control/bits/TakeBack";
