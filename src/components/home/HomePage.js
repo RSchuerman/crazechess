@@ -27,7 +27,7 @@ function HomePage(props) {
             <>
               <p className="m-4">This is a chess game. Continue to play!</p>
               <Link to="/play">
-                <Button varient="outline-primary">Play</Button>
+                <button className="clkbtn">Play</button>
               </Link>
             </>
           )}
