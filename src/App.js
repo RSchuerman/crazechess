@@ -1,17 +1,18 @@
 import "./App.css";
-import Board from "./components/Board/Board";
 import { reducer } from "./reducer/reducer";
 import { useReducer } from "react";
 import { initGameState } from "./constants";
 import AppContext from "./contexts/Context";
-import Control from "./components/Control/Control";
-import TakeBack from "./components/Control/bits/TakeBack";
-import MovesList from "./components/Control/bits/MovesList";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./components/home/HomePage";
+import LogInPage from "./components/auth/LoginPage";
 
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "./amplifyconfiguration.json";
+import SiteNav from "./components/common/SiteNav";
+import SiteFooter from "./components/common/SiteFooter";
 Amplify.configure(config);
 
 function App({ signOut, user }) {
@@ -24,15 +25,15 @@ function App({ signOut, user }) {
 
   return (
     <AppContext.Provider value={providerState}>
-      <h1>Hello {user.username}</h1>
-      <button onClick={signOut}>Sign out</button>
-      <div className="App">
-        <Board />
-        <Control>
-          <MovesList />
-          <TakeBack />
-        </Control>
-      </div>
+      {/* //   <h1>Hello {user.preferred_username}</h1>
+    //   <button onClick={signOut}>Sign out</button> */}
+      <SiteNav />
+      <Routes>
+        <Route path="*" element={<HomePage />} />
+        <Route path="/" exact={true} element={<HomePage />} />
+        <Route path="/login" element={<LogInPage />} />
+      </Routes>
+      <SiteFooter />
     </AppContext.Provider>
   );
 }
