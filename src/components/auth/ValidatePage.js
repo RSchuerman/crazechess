@@ -15,15 +15,19 @@ function ValidatePage() {
   const [username, setUserName] = useState("");
   const [authenticationCode, setAuthenticationCode] = useState("");
 
-  async function handleRegisterConfirmation({ username, authenticationCode }) {
+  async function handleRegisterConfirmation(event) {
+    event.preventDefault();
     try {
       const { isSignUpComplete, nextStep } = await confirmSignUp({
         username,
-        authenticationCode,
+        confirmationCode: authenticationCode,
       });
-      handleAutoSignIn();
-    } catch (error) {
-      console.log("error confirming sign up", error);
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+      if (err) {
+        alert(err);
+      }
     }
   }
 
