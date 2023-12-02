@@ -14,7 +14,7 @@
   gap: 30px;
 }
 
-.container {
+.container1 {
   height: 600px;
   width: 500px;
   background-color: white;
@@ -123,7 +123,7 @@
 /* For Responsiveness of the page */
 
 @media screen and (max-width: 650px) {
-  .container {
+  .container1 {
     height: 600px;
     width: 300px;
   }

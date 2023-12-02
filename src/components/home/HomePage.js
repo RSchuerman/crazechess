@@ -1,30 +1,38 @@
-import "../../App.css";
-import { reducer } from "../../reducer/reducer";
-import { useReducer } from "react";
-import { initGameState } from "../../constants";
-import AppContext from "../../contexts/Context";
-import Board from "../Board/Board";
-import Control from "../Control/Control";
-import TakeBack from "../Control/bits/TakeBack";
-import MovesList from "../Control/bits/MovesList";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
-function HomePage() {
-  const [appState, dispatch] = useReducer(reducer, initGameState);
-
-  const providerState = {
-    appState,
-    dispatch,
-  };
+function HomePage(props) {
   return (
-    <AppContext.Provider value={providerState}>
-      <div className="App">
-        <Board />
-        <Control>
-          <MovesList />
-          <TakeBack />
-        </Control>
-      </div>
-    </AppContext.Provider>
+    <Container>
+      <Row className="px-4 my-5">
+        <Col xs={4} sm={6}>
+          <Image src="../../assets/crazelogo.png" fluid />
+        </Col>
+        <Col sm={6}>
+          <h1 className="font-weight-light">Reed Chess</h1>
+          {props.isAuthenticated === false && (
+            <>
+              <p className="m-4">This is a chess game. Login to see more!</p>
+              <Link to="/login">
+                <Button varient="outline-primary">Login</Button>
+              </Link>
+            </>
+          )}
+          {props.isAuthenticated !== false && (
+            <>
+              <p className="m-4">This is a chess game. Continue to play!</p>
+              <Link to="/play">
+                <Button varient="outline-primary">Play</Button>
+              </Link>
+            </>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

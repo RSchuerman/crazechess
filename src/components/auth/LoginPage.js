@@ -1,136 +1,231 @@
 import "./LoginPage.css";
 import { useState } from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
-// import { Amplify, Auth } from "aws-amplify";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
+import { Amplify } from "aws-amplify";
+import { signIn, signUp, autoSignIn } from "@aws-amplify/auth";
 // import { Authenticator } from "@aws-amplify/ui-react";
-// import "@aws-amplify/ui-react/styles.css";
-// import awsExports from "../../aws-exports";
-// Amplify.configure(awsExports);
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "../../aws-exports";
+Amplify.configure(awsExports);
 
-function LogInPage() {
-  const [isMoveSlider, setIsActive] = useState(false);
-  const [isFormSectionMove, setIsActive2] = useState(false);
-  let sliderClassNames = classNames("slider", { moveslider: isMoveSlider });
-  let formSectionClassNames = classNames("form-section", {
-    form_section_move: isFormSectionMove,
-  });
-  const handleClick = () => {
-    setIsActive(!isMoveSlider);
-    setIsActive2(!isFormSectionMove);
-  };
+function LogInPage(props) {
+  const navigate = useNavigate();
+  //   const [isMoveSlider, setIsActive] = useState(false);
+  //   const [isFormSectionMove, setIsActive2] = useState(false);
+  //   let sliderClassNames = classNames("slider", { moveslider: isMoveSlider });
+  //   let formSectionClassNames = classNames("form-section", {
+  //     form_section_move: isFormSectionMove,
+  //   });
+  //   const handleClick = () => {
+  //     setIsActive(!isMoveSlider);
+  //     setIsActive2(!isFormSectionMove);
+  //   };
 
-  //   const [username, setUsername] = useState("");
-  //   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   //   const [confirmPassword, setConfirmPassword] = useState("");
-  //   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
-  //   const handleSignUp = async () => {
-  //     try {
-  //       const { user } = await Auth.signUp({
-  //         username: username.toLowerCase(),
-  //         password: password,
-  //         attributes: {
-  //           email: email.toLowerCase(),
-  //         },
-  //         autoSignIn: {
-  //           enabled: true,
-  //         },
-  //       });
+  async function handleAutoSignIn() {
+    try {
+      const signInOutput = await autoSignIn();
+      // handle sign-in steps
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  //       navigate("/validate");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
+  async function handleSignUp({ username, password, email }) {
+    try {
+      const { isSignUpComplete, userId, nextStep } = await signUp({
+        username,
+        password,
+        options: {
+          userAttributes: {
+            email,
+          },
+          autoSignIn: true,
+        },
+      });
 
-  //   const handleLogin = async () => {
-  //     try {
-  //       await Auth.signIn(username, password);
+      navigate("/validate");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  //       navigate("/");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
+  async function handleLogin() {
+    try {
+      const { isSignedIn, nextStep } = await signIn({ username, password });
+
+      props.updateAuthStatus(true);
+      navigate("/play");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
-    <div className="body">
-      <div className="container">
-        <div className={sliderClassNames}></div>
-        <div className="btn">
-          <button className="login" onClick={handleClick}>
-            Login
-          </button>
-          <button className="signup" onClick={handleClick}>
-            Signup
-          </button>
-        </div>
-
-        <div className={formSectionClassNames}>
-          <form id="LoginForm">
-            <div className="login-box">
-              <input
-                type="text"
-                className="name ele"
-                placeholder="Enter your Username"
-                // onChange={(evt) => setUsername(evt.target.value)}
+    <Container>
+      <Row className="px-4 my-5">
+        <Col>
+          <h1>Login</h1>
+        </Col>
+      </Row>
+      <Row className="px-4 my-5">
+        <Col sm={6}>
+          <Form>
+            <Form.Group className="mb-3" controlid="formBasicUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="txt"
+                placeholder="Enter Username"
+                onChange={(evt) => setUsername(evt.target.value)}
               />
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlid="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="password ele"
-                placeholder="password"
-                //onChange={(evt) => setPassword(evt.target.value)}
+                min-length="8"
+                placeholder="Enter Password"
+                onChange={(evt) => setPassword(evt.target.value)}
               />
-              <button
-                className="clkbtn"
-                //onClick={handleLogin}
-              >
-                Login
-              </button>
-              <a className="guest-text" href="/">
-                Continue to play as guest.
-              </a>
-            </div>
-          </form>
-
-          <form id="SignUpForm">
-            <div className="signup-box">
-              <input
-                type="text"
-                className="name ele"
-                placeholder="Enter your Username"
-                //onChange={(evt) => setUsername(evt.target.value)}
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={handleLogin}>
+              Login
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+      <Row className="px-4 my-5">
+        <Col sm={6}>
+          <Form>
+            <Form.Group className="mb-3" controlid="formBasicUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="txt"
+                placeholder="Enter Username"
+                onChange={(evt) => setUsername(evt.target.value)}
               />
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlid="formBasicEmail">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
                 type="email"
-                className="email ele"
-                placeholder="youremail@email.com"
-                //onChange={(evt) => setEmail(evt.target.value)}
+                placeholder="Enter email"
+                onChange={(evt) => setEmail(evt.target.value)}
               />
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlid="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="password ele"
-                placeholder="password"
-                //onChange={(evt) => setPassword(evt.target.value)}
+                min-length="8"
+                placeholder="Enter Password"
+                onChange={(evt) => setPassword(evt.target.value)}
               />
-              <input
+            </Form.Group>
+            {/* <Form.Group className="mb-3" controlid="formConfirm">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="password ele"
-                placeholder="Confirm password"
-                //onChange={(evt) => setConfirmPassword(evt.target.value)}
+                min-length="8"
+                placeholder="Confirm Password"
+                onChange={(evt) => setConfirmPassword(evt.target.value)}
               />
-              <button
-                className="clkbtn"
-                //onClick={handleSignUp}
-              >
-                Signup
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+            </Form.Group> */}
+            <Button variant="primary" type="submit" onClick={handleSignUp}>
+              Sign up
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+    // <div className="body">
+    //   <div className="container1">
+    //     <div className={sliderClassNames}></div>
+    //     <div className="btn">
+    //       <button className="login" onClick={handleClick}>
+    //         Login
+    //       </button>
+    //       <button className="signup" onClick={handleClick}>
+    //         Signup
+    //       </button>
+    //     </div>
+
+    //     <div className={formSectionClassNames}>
+    //       <form id="LoginForm">
+    //         <div className="login-box">
+    //           <input
+    //             type="text"
+    //             className="name ele"
+    //             placeholder="Enter your Username"
+    //             // onChange={(evt) => setUsername(evt.target.value)}
+    //           />
+    //           <input
+    //             type="password"
+    //             className="password ele"
+    //             placeholder="password"
+    //             //onChange={(evt) => setPassword(evt.target.value)}
+    //           />
+    //           <button
+    //             className="clkbtn"
+    //             //onClick={handleLogin}
+    //           >
+    //             Login
+    //           </button>
+    //           <a className="guest-text" href="/">
+    //             Continue to play as guest.
+    //           </a>
+    //         </div>
+    //       </form>
+
+    //       <form id="SignUpForm">
+    //         <div className="signup-box">
+    //           <input
+    //             type="text"
+    //             className="name ele"
+    //             placeholder="Enter your Username"
+    //             //onChange={(evt) => setUsername(evt.target.value)}
+    //           />
+    //           <input
+    //             type="email"
+    //             className="email ele"
+    //             placeholder="youremail@email.com"
+    //             //onChange={(evt) => setEmail(evt.target.value)}
+    //           />
+    //           <input
+    //             type="password"
+    //             className="password ele"
+    //             placeholder="password"
+    //             //onChange={(evt) => setPassword(evt.target.value)}
+    //           />
+    //           <input
+    //             type="password"
+    //             className="password ele"
+    //             placeholder="Confirm password"
+    //             //onChange={(evt) => setConfirmPassword(evt.target.value)}
+    //           />
+    //           <button
+    //             className="clkbtn"
+    //             //onClick={handleSignUp}
+    //           >
+    //             Signup
+    //           </button>
+    //         </div>
+    //       </form>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
