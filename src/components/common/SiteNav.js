@@ -1,23 +1,19 @@
 import "./SiteNav.css";
 
-import { Authenticator } from "@aws-amplify/ui-react";
-import { useNavigate } from "react-router-dom";
-
 function SiteNav(props) {
-  const navigate = useNavigate();
   const handleLogout = () => {
     props.logOut();
   };
   return (
     <header className="nav">
-      <p className="link" onClick={navigate("/")}>
+      <a className="link" href="/">
         Home
-      </p>
+      </a>
       <p className="link">Co-op Board</p>
       <p className="link">Player vs Computer</p>
-      <p className="link" onClick={navigate("/login")}>
+      <a className="link" href="/login">
         Login
-      </p>
+      </a>
       <p onClick={handleLogout}>Logout</p>
     </header>
   );

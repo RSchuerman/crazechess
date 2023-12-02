@@ -2,7 +2,6 @@ import "./LoginPage.css";
 import { useState } from "react";
 import classNames from "classnames";
 
-import { useNavigate } from "react-router-dom";
 // import { Amplify, Auth } from "aws-amplify";
 // import { Authenticator } from "@aws-amplify/ui-react";
 // import "@aws-amplify/ui-react/styles.css";
@@ -19,10 +18,6 @@ function LogInPage() {
   const handleClick = () => {
     setIsActive(!isMoveSlider);
     setIsActive2(!isFormSectionMove);
-  };
-  const navigate = useNavigate();
-  const continueGuest = () => {
-    navigate("/");
   };
 
   //   const [username, setUsername] = useState("");
@@ -93,12 +88,9 @@ function LogInPage() {
               >
                 Login
               </button>
-              <p
-                className="guest-text"
-                //onClick={continueGuest}
-              >
+              <a className="guest-text" href="/">
                 Continue to play as guest.
-              </p>
+              </a>
             </div>
           </form>
 
