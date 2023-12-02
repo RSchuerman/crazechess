@@ -1,8 +1,4 @@
 import "./App.css";
-import { reducer } from "./reducer/reducer";
-import { useReducer } from "react";
-import { initGameState } from "./constants";
-import AppContext from "./contexts/Context";
 
 import { Route, Routes } from "react-router-dom";
 import { Amplify } from "aws-amplify";
@@ -18,15 +14,8 @@ import LogInPage from "./components/auth/LoginPage";
 Amplify.configure(config);
 
 function App({ signOut, user }) {
-  const [appState, dispatch] = useReducer(reducer, initGameState);
-
-  const providerState = {
-    appState,
-    dispatch,
-  };
-
   return (
-    <AppContext.Provider value={providerState}>
+    <div>
       {/* //   <h1>Hello {user.preferred_username}</h1>
     //   <button onClick={signOut}>Sign out</button> */}
       <SiteNav logOut={signOut} />
@@ -36,7 +25,7 @@ function App({ signOut, user }) {
         <Route path="/login" element={<LogInPage />} />
       </Routes>
       <SiteFooter />
-    </AppContext.Provider>
+    </div>
   );
 }
 
