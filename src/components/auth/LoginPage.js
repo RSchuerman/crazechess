@@ -43,7 +43,7 @@ function LogInPage(props) {
     }
   }
 
-  async function handleSignUp({ username, password, email }) {
+  async function handleSignUp() {
     try {
       const { isSignUpComplete, userId, nextStep } = await signUp({
         username,
@@ -64,7 +64,7 @@ function LogInPage(props) {
 
   async function handleLogin() {
     try {
-      const { isSignedIn, nextStep } = await signIn({ username, password });
+      const { isSignedIn, nextStep } = await signIn(username, password);
 
       props.updateAuthStatus(true);
       navigate("/play");

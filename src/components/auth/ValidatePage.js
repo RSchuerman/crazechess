@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { confirmSignUp } from "@aws-amplify/auth";
+import { confirmSignUp, autoSignIn } from "@aws-amplify/auth";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -21,8 +21,18 @@ function ValidatePage() {
         username,
         authenticationCode,
       });
+      handleAutoSignIn();
     } catch (error) {
       console.log("error confirming sign up", error);
+    }
+  }
+
+  async function handleAutoSignIn() {
+    try {
+      const signInOutput = await autoSignIn();
+      // handle sign-in steps
+    } catch (error) {
+      console.log(error);
     }
   }
 
