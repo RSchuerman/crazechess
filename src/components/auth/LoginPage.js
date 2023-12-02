@@ -1,5 +1,5 @@
 import "./LoginPage.css";
-import { Component, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 
