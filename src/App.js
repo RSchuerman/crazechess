@@ -2,9 +2,10 @@ import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Amplify } from "aws-amplify";
+import { getCurrentUser } from "@aws-amplify/auth";
 import "@aws-amplify/ui-react/styles.css";
 // import config from "./amplifyconfiguration.json";
 import awsExports from "./aws-exports";
@@ -20,6 +21,18 @@ Amplify.configure(awsExports);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  async function ionViewCanEnter() {
+    try {
+      await getCurrentUser();
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+    }
+  }
+  useEffect(() => {
+    ionViewCanEnter();
+  });
 
   function updateAuthStatus(authStatus) {
     setIsAuthenticated(authStatus);
