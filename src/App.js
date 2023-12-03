@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 
 import { Amplify } from "aws-amplify";
-import { getCurrentUser } from "@aws-amplify/auth";
+import { getCurrentUser, fetchUserAttributes } from "@aws-amplify/auth";
 import "@aws-amplify/ui-react/styles.css";
 // import config from "./amplifyconfiguration.json";
 import awsExports from "./aws-exports";
@@ -15,24 +15,27 @@ import SiteFooter from "./components/common/SiteFooter";
 import HomePage from "./components/home/HomePage";
 import LoginPage from "./components/auth/LoginPage";
 import GamePage from "./components/play/GamePage";
+import PEGamePage from "./components/play/PEGamePage";
 import ValidatePage from "./components/auth/ValidatePage";
 
 Amplify.configure(awsExports);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   async function ionViewCanEnter() {
     try {
-      await getCurrentUser();
+      const user = await getCurrentUser();
       setIsAuthenticated(true);
+      setUser(user.username);
     } catch {
       setIsAuthenticated(false);
     }
   }
   useEffect(() => {
     ionViewCanEnter();
-  });
+  }, []);
 
   function updateAuthStatus(authStatus) {
     setIsAuthenticated(authStatus);
@@ -42,6 +45,7 @@ function App() {
       <SiteNav
         isAuthenticated={isAuthenticated}
         updateAuthStatus={updateAuthStatus}
+        user={user}
       />
       <Routes>
         <Route
@@ -61,6 +65,10 @@ function App() {
         <Route
           path="/play"
           element={<GamePage isAuthenticated={isAuthenticated} />}
+        />
+        <Route
+          path="/play2"
+          element={<PEGamePage isAuthenticated={isAuthenticated} />}
         />
       </Routes>
       <SiteFooter />

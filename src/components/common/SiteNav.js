@@ -28,6 +28,7 @@ function SiteNav(props) {
             {props.isAuthenticated !== false && (
               <Nav className="ms-md-auto">
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                <Nav.Link>{props.user}</Nav.Link>
               </Nav>
             )}
             {/* {props.isAuthenticated === false && (
