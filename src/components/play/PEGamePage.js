@@ -11,7 +11,7 @@ import Control from "../Control/Control";
 import TakeBack from "../Control/bits/TakeBack";
 import MovesList from "../Control/bits/MovesList";
 
-function PEGamePage(props) {
+function PPGamePage(props) {
   const navigate = useNavigate();
   useEffect(() => {
     props.isAuthenticated !== true && navigate("/");
@@ -23,6 +23,7 @@ function PEGamePage(props) {
     appState,
     dispatch,
   };
+
   return (
     <AppContext.Provider value={providerState}>
       <div className="App">
@@ -36,4 +37,4 @@ function PEGamePage(props) {
   );
 }
 
-export default PEGamePage;
+export default PPGamePage;

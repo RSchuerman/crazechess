@@ -1,9 +1,19 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
-type Todo @model {
-  id: ID!
-  name: String!
-  description: String
+enum GameResult {
+  DRAW
+  WON_WHITE
+  WON_BLACK
 }
+
+type Game @model @auth(rules: [{allow: private, operations: [create, read, update]}]) {
+  id: ID!
+  hostID: String!
+  opponentID: String
+  turn: String
+  result: GameResult
+  hostName: String
+  opponentName: String
+  hostColor: String
+  opponentColor: String
+  board: String
+}
+ 

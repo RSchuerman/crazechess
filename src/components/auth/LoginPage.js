@@ -78,7 +78,7 @@ function LogInPage(props) {
       const { isSignedIn, nextStep } = await signIn({ username, password });
 
       props.updateAuthStatus(true);
-      navigate("/play");
+      navigate("/");
       console.log(isSignedIn, nextStep);
     } catch (err) {
       console.log(err);

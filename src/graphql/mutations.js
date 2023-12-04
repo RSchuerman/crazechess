@@ -1,47 +1,74 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createGame = /* GraphQL */ `
+  mutation CreateGame(
+    $input: CreateGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createGame(input: $input, condition: $condition) {
       id
-      name
-      description
+      hostID
+      opponentID
+      turn
+      result
+      hostName
+      opponentName
+      hostColor
+      opponentColor
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateGame = /* GraphQL */ `
+  mutation UpdateGame(
+    $input: UpdateGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateGame(input: $input, condition: $condition) {
       id
-      name
-      description
+      hostID
+      opponentID
+      turn
+      result
+      hostName
+      opponentName
+      hostColor
+      opponentColor
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteGame = /* GraphQL */ `
+  mutation DeleteGame(
+    $input: DeleteGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteGame(input: $input, condition: $condition) {
       id
-      name
-      description
+      hostID
+      opponentID
+      turn
+      result
+      hostName
+      opponentName
+      hostColor
+      opponentColor
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
