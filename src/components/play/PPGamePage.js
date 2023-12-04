@@ -10,15 +10,24 @@ import { GameResult } from "../../models";
 import { Game } from "../../models";
 
 function PPGamePage({ user, isAuthenticated, currentGame }) {
-  
   const navigate = useNavigate();
   useEffect(() => {
-    //fetchGame();
     isAuthenticated !== true && navigate("/");
   });
 
+  useEffect(() => {
+    const subscription = DataStore.observe(Game).subscribe((msg) => {
+            // console.log('observe received message');
+            // console.log(msg.model, msg.opType, msg.element);
+            // console.log('load fetch games');
+            fetchGame();
+          });
+    fetchGame();
+    return () => subscription.unsubscribe();
+  },[])
+
   // const chess = useMemo(() => new Chess(), [])
-  const [chess, setChess] = useState("")
+  let [chess, setChess] = useState("")
   const [fen, setFen] = useState("");
   const [over, setOver] = useState("");
   const [turn, setTurn] = useState("");
@@ -57,8 +66,8 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
   }, []);
 
   async function saveGame(newFen, newTurn) {
-    console.log("saving game");
-    console.log(newFen,newTurn);
+    // console.log("saving game");
+    // console.log(newFen,newTurn);
     const model = await DataStore.query(Game, currentGame.id)
     await DataStore.save(
       Game.copyOf(model, (item) => {
@@ -67,8 +76,6 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
         item.turn = newTurn;
       })
     );
-    
-    
     fetchGame();
   }
 
@@ -76,7 +83,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
     (move) => {
       try {
         
-    console.log("making a move");
+    // console.log("making a move");
         const result = chess.move(move); // update Chess instance
         saveGame(chess.fen(),chess.turn());
         // setFen(chess.fen()); // update fen state to trigger a re-render
@@ -110,10 +117,10 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
   );
 
   function onDrop(sourceSquare, targetSquare) {
-    console.log("making a turn with ",whoAmI);
+    // console.log("making a turn with ",whoAmI);
     if( turn === whoAmI ) {
       
-      console.log("really making a turn with ",whoAmI);
+      // console.log("really making a turn with ",whoAmI);
       const moveData = {
         from: sourceSquare,
         to: targetSquare,
@@ -136,13 +143,13 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
   }
 
   async function fetchGame() {
-    console.log("Fetch Game");
+    // console.log("Fetch Game");
     try {
       const model = await DataStore.query(Game, currentGame);
-      console.log(model);
+      // console.log(model);
       setFen(model.board);
       setTurn(model.turn);
-      setChess(new Chess(model.board));
+      chess = new Chess(model.board);
       
       if( model.opponentName === user ) {
         setWhoAmI(model.opponentColor === "w" ? "w" : "b");
@@ -150,8 +157,8 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
       else {
         setWhoAmI(model.hostColor === "w" ? "w" : "b");
       }
-      console.log("whoAmI", whoAmI);
-      console.log("turn", turn)
+      // console.log("whoAmI", whoAmI);
+      // console.log("turn", turn)
     } catch (err) {
       console.log("error fetching game" + err);
     }
