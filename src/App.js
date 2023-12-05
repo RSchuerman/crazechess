@@ -18,6 +18,7 @@ import GamePage from "./components/play/GamePage";
 import PEGamePage from "./components/play/PEGamePage";
 import PPGamePage from "./components/play/PPGamePage";
 import ValidatePage from "./components/auth/ValidatePage";
+import ListGames from "./components/play/listGames";
 
 Amplify.configure(awsExports);
 
@@ -52,8 +53,10 @@ function App() {
       />
       {/* <InitGame user={user} /> */}
       <Routes>
+        
         <Route
-          path="*"
+          path="/"
+          exact={true}
           element={
             <HomePage
               isAuthenticated={isAuthenticated}
@@ -63,26 +66,57 @@ function App() {
           }
         />
         <Route
-          path="/"
-          exact={true}
-          element={<HomePage isAuthenticated={isAuthenticated} user={user} changeActiveGame={setActiveGame}/>}
-        />
-        <Route
           path="/login"
           element={<LoginPage updateAuthStatus={updateAuthStatus} />}
         />
         <Route path="/validate" element={<ValidatePage />} />
-        {/* <Route
-          path="/play"
-          element={<GamePage isAuthenticated={isAuthenticated} />}
-        /> */}
         <Route
-          path="/play"
+          path="/playOnline"
           element={
-            <PPGamePage 
+            <PPGamePage
               user={user}
               isAuthenticated={isAuthenticated}
               currentGame={activeGame}
+            />
+          }
+        />
+        <Route
+          path="/playAI"
+          element={
+            <PEGamePage
+              user={user}
+              isAuthenticated={isAuthenticated}
+              currentGame={activeGame}
+            />
+          }
+        />
+        <Route
+          path="/play"
+          element={
+            <GamePage
+              user={user}
+              isAuthenticated={isAuthenticated}
+              currentGame={activeGame}
+            />
+          }
+        />
+        <Route
+          path="/games"
+          element={
+            <ListGames
+              user={user}
+              isAuthenticated={isAuthenticated}
+              changeActiveGame={setActiveGame}
+            />
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <HomePage
+              isAuthenticated={isAuthenticated}
+              user={user}
+              changeActiveGame={setActiveGame}
             />
           }
         />

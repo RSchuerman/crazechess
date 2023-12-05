@@ -7,13 +7,7 @@ body {
   padding: 0;
 }
 
-.boardPage {
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-}
+
 
 .App {
   display: grid;
@@ -41,4 +35,9 @@ button {
   font-size: 22px;
   border: none;
   cursor: pointer;
+}
+
+.gameDialogue {
+  margin: 10px;
+  font-size: xx-large;
 }

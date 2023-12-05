@@ -12,10 +12,10 @@ import TakeBack from "../Control/bits/TakeBack";
 import MovesList from "../Control/bits/MovesList";
 
 function GamePage(props) {
-  const navigate = useNavigate();
-  useEffect(() => {
-    props.isAuthenticated !== true && navigate("/");
-  });
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   props.isAuthenticated !== true && navigate("/");
+  // });
 
   const [appState, dispatch] = useReducer(reducer, initGameState);
 

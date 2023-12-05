@@ -112,6 +112,17 @@
   font-size: 22px;
   border: none;
   cursor: pointer;
+  margin: 5px;
+}
+.clkbtn2 {
+  height: 60px;
+  width: auto;
+  border-radius: 50px;
+  background-image: linear-gradient(to right, #639bb5, #397794);
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
 }
 .guest-text {
   color: blue; /* Change the color as per your preference */
@@ -241,5 +252,15 @@
     height: 50px;
     width: 130px;
     font-size: 19px;
+  }
+  .clkbtn2 {
+    height: 50px;
+    width: auto;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, #639bb5, #397794);
+    font-size: 19px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
   }
 }

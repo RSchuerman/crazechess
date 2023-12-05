@@ -1,0 +1,42 @@
+.style {
+  width: 100px;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 200;
+  color: #232f3e;
+  text-align: center;
+}
+.styleH2 {
+  width: 80vw;
+  margin: 40px auto;
+  padding: 10px;
+  display: grid;
+  font-size: 18px;
+  font-weight: 800;
+  color: #232f3e;
+  text-align: center;
+  border-top: 1px solid #232f3e;
+  border-bottom: 1px solid #232f3e;
+}
+
+.containerStyle {
+  margin: 0px auto 40px;
+  display: grid;
+  width: 100vw;
+}
+
+.styleUL {
+  width: 80vw;
+  margin: 0px auto;
+  padding: 10px;
+  display: grid;
+  font-size: 18px;
+  font-weight: 200;
+  color: #232f3e;
+}
+
+.gameStyle {
+  border-bottom: 1px solid #232f3e;
+  padding: 20p;
+}

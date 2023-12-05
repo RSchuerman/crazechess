@@ -88,24 +88,24 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
         saveGame(chess.fen(),chess.turn());
         // setFen(chess.fen()); // update fen state to trigger a re-render
         // setTurn(chess.turn());
-        // console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
+        console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
 
-        // if (chess.isGameOver()) {
-        //   // check if move led to "game over"
-        //   if (chess.isCheckmate()) {
-        //     // if reason for game over is a checkmate
-        //     // Set message to checkmate.
-        //     setOver(
-        //       `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!`
-        //     );
-        //     // The winner is determined by checking which side made the last move
-        //   } else if (chess.isDraw()) {
-        //     // if it is a draw
-        //     setOver("Draw"); // set message to "Draw"
-        //   } else {
-        //     setOver("Game over");
-        //   }
-        // }
+        if (chess.isGameOver()) {
+          // check if move led to "game over"
+          if (chess.isCheckmate()) {
+            // if reason for game over is a checkmate
+            // Set message to checkmate.
+            setOver(
+              `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!`
+            );
+            // The winner is determined by checking which side made the last move
+          } else if (chess.isDraw()) {
+            // if it is a draw
+            setOver("Draw"); // set message to "Draw"
+          } else {
+            setOver("Game over");
+          }
+        }
 
         return result;
       } catch (e) {
@@ -125,7 +125,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
         from: sourceSquare,
         to: targetSquare,
         color: turn,
-        //promotion: "q",
+        promotion: "q",
       };
 
       
@@ -142,6 +142,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
     }
   }
 
+  
   async function fetchGame() {
     // console.log("Fetch Game");
     try {
@@ -161,6 +162,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
       // console.log("turn", turn)
     } catch (err) {
       console.log("error fetching game" + err);
+      navigate("/games")
     }
   }
 
@@ -172,6 +174,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
           boardOrientation={whoAmI === "w" ? "white" : "black"}
           position={fen}
           onPieceDrop={onDrop}
+          autoPromoteToQueen={true}
           customDarkSquareStyle={{ backgroundColor: "#639bb5" }}
           customLightSquareStyle={{ backgroundColor: "#e3dbcf" }}
           customPieces={customPieces}
@@ -180,6 +183,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.5)",
           }}
         />
+        <p className="gameDialogue">{over ? over : ("Turn:", turn === 'w' ? "White's Turn": "Black's Turn") }</p>
       </div>
     </div>
   );
