@@ -40,7 +40,7 @@ function ValidatePage() {
     <div className="body">
       <div className="container1">
         <div className="login-box">
-          <h1 className="login">Validate</h1>
+          <h1 className="login">We sent a verification code to your email.</h1>
           <input
             type="text"
             className="name ele"

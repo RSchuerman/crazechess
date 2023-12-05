@@ -144,7 +144,7 @@ function PPGamePage({ user, isAuthenticated, currentGame }) {
 
   
   async function fetchGame() {
-    // console.log("Fetch Game");
+    console.log("Fetch Game");
     try {
       const model = await DataStore.query(Game, currentGame);
       // console.log(model);
