@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+This is a chess app I built as a challenge for myself. It uses AWS to handle the backend. It uses AWS amplify for hosting, AWS cognito for userpool, DynamoDB for data models.
+I built it using examples from these places:
+https://blog.openreplay.com/building-a-chess-game-with-react/
+https://github.com/Clariity/react-chessboard/tree/main
+https://react-chessboard.vercel.app/?path=/docs/example-chessboard--click-to-move
+https://catalog.us-east-1.prod.workshops.aws/workshops/fd204433-05a1-4a69-b93f-8bc5028cf8ea/en-US/module4/game-logic-implementation
+...and many other google searches!
+
+Here is a link to the project:
+https://master.dhbm9b1v3ye9n.amplifyapp.com/
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +78,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
